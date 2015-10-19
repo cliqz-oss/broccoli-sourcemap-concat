@@ -26,6 +26,7 @@ function ConcatWithMaps(inputNode, options, Strategy) {
   }
 
   this.Strategy = Strategy;
+  this.process = options.process;
   this.inputFiles = options.inputFiles;
   this.outputFile = options.outputFile;
   this.allowNone = options.allowNone;
@@ -79,6 +80,10 @@ ConcatWithMaps.prototype.build = function() {
     } else {
       concat.addSpace(separator);
     }
+  }
+
+  if (this.process) {
+    this.concat.process = this.process;
   }
 
   if (this.header) {

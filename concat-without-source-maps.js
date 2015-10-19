@@ -10,7 +10,11 @@ function Concat(attrs) {
 }
 
 Concat.prototype.addFile = function(file) {
-  this._internal += fs.readFileSync(path.join(this.baseDir, file), 'UTF-8');
+  var src = fs.readFileSync(path.join(this.baseDir, file), 'UTF-8');
+  if (this.process) {
+    src = this.process(src, file);
+  }
+  this._internal += src;
 };
 
 Concat.prototype.addSpace = function(space) {
